@@ -1,5 +1,13 @@
 import { Component } from '@angular/core';
-import { trigger, transition, animate, style } from '@angular/animations';
+import {
+  trigger,
+  transition,
+  animate,
+  style,
+  state,
+  query,
+  stagger,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-about',
@@ -8,19 +16,33 @@ import { trigger, transition, animate, style } from '@angular/animations';
   animations: [
     trigger('slideInFromLeft', [
       transition(':enter', [
-        style({ transform: 'translateX(-100%)' }),
-        animate('1s ease-in-out', style({ transform: 'translateX(0%)' })),
+        query('.card', [
+          style({ transform: 'translateX(-100%)' }),
+          stagger(1000, [
+            animate('2s ease-in-out', style({ transform: 'translateX(0%)' })),
+          ]),
+        ]),
       ]),
     ]),
-    trigger('slideInFromLeft1', [
-      transition(':enter', [
-        style({ transform: 'translateX(-100%)' }),
-        animate('1s ease-in-out', style({ transform: 'translateX(0%)' })),
-        
-      ]),
-    ])
   ],
 })
 export class AboutComponent {
-
+  cardData: any[] = [
+    {
+      imgSrc: '../../../assets/icons/frontend.png',
+      Text: 'Frontend Developer',
+    },
+    {
+      imgSrc:'../../../assets/icons/backend.png',
+      Text: 'Backend Developer',
+    },
+    {
+      imgSrc: '../../../assets/icons/UIUX.png',
+      Text: 'UI/UX Design',
+    },
+    {
+      imgSrc: '../../../assets/icons/prototyping.png',
+      Text: 'Software Prototyping',
+    },
+  ];
 }
